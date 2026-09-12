@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teatro Pubblico Ligure — Calendario</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f7f5f1;--bg-soft:#fffdf9;--text:#191817;--muted:#6f6963;--line:rgba(25,24,23,.18);--line-soft:rgba(25,24,23,.10);--accent:#b51f2b;--accent-soft:rgba(181,31,43,.10)}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{background:var(--bg);color:var(--text);font-family:"DM Sans",sans-serif;overflow-x:hidden}button,a,input,textarea,select{font:inherit}
+.top-nav{position:sticky;top:0;z-index:60;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:14px 5vw;border-bottom:1px solid var(--line);background:rgba(247,245,241,.93);backdrop-filter:blur(10px)}
+.brand-logo{display:flex;align-items:center;flex:0 0 auto;width:150px;height:38px;text-decoration:none;overflow:hidden}.brand-logo img{display:block;width:100%;height:100%;object-fit:contain;object-position:left center}.top-nav .brand-logo{margin-right:4px}.intro-center h1{margin-top:0}
+/* Stile raffinato per la scritta sopra Calendario */
+.intro-presenta{font-family:"Playfair Display",serif;font-size:clamp(18px,2vw,25px);font-weight:400;line-height:1.15;letter-spacing:.035em;color:rgba(25,24,23,.58);margin-bottom:18px;opacity:0;animation:introRise .8s ease .18s forwards}
+/* Ricerca moderna, coerente con il linguaggio editoriale della pagina */
+.search-wrap{position:relative;flex:1 1 520px;max-width:620px;min-width:260px;z-index:70}
+.search-box{height:46px;display:flex;align-items:center;gap:11px;padding:0 13px 0 15px;border:1px solid rgba(25,24,23,.14);border-radius:999px;background:rgba(255,253,249,.72);box-shadow:0 8px 24px rgba(25,24,23,.045);transition:border-color .25s ease,box-shadow .25s ease,background .25s ease}
+.search-box:focus-within{border-color:rgba(181,31,43,.45);background:rgba(255,253,249,.92);box-shadow:0 10px 30px rgba(25,24,23,.08),0 0 0 3px rgba(181,31,43,.055)}
+.search-icon{flex:0 0 auto;color:var(--muted);font-size:20px;line-height:1;transform:translateY(-1px);transition:color .25s ease}
+.search-box:focus-within .search-icon{color:var(--accent)}
+.search-input{width:100%;min-width:0;border:0;outline:0;background:transparent;color:var(--text);font-size:12px;letter-spacing:.01em}
+.search-input::placeholder{color:rgba(111,105,99,.72)}
+.search-clear{flex:0 0 auto;width:27px;height:27px;border:0;border-radius:50%;background:transparent;color:var(--muted);font-size:18px;line-height:1;cursor:pointer;opacity:0;visibility:hidden;transition:.2s ease}
+.search-clear.visible{opacity:1;visibility:visible}
+.search-clear:hover{background:rgba(181,31,43,.08);color:var(--accent)}
+.search-suggestions{position:absolute;left:0;right:0;top:calc(100% + 9px);padding:7px;background:rgba(255,253,249,.97);border:1px solid var(--line-soft);border-radius:18px;box-shadow:0 20px 55px rgba(25,24,23,.14);backdrop-filter:blur(14px);display:none;overflow:hidden}
+.search-suggestions.open{display:block}
+.search-suggestion{width:100%;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 13px;border:0;border-radius:12px;background:transparent;text-align:left;color:var(--text);cursor:pointer;transition:background .2s ease,color .2s ease}
+.search-suggestion:hover{background:rgba(181,31,43,.07);color:var(--accent)}
+.search-suggestion-main{min-width:0}.search-suggestion-title{font-family:"Playfair Display",serif;font-size:16px;line-height:1.15}.search-suggestion-meta{margin-top:4px;color:var(--muted);font-size:9px;letter-spacing:.04em}.search-suggestion-type{flex:0 0 auto;color:var(--accent);font-size:8px;letter-spacing:.12em;text-transform:uppercase}.search-empty{padding:15px;color:var(--muted);font-size:10px}
+@media(max-width:760px){.search-wrap{order:3;flex:1 1 100%;max-width:none;min-width:0}.top-nav{flex-wrap:wrap}.search-box{height:44px}.intro-presenta{font-size:18px;margin-bottom:16px}}
+@media(max-width:760px){.brand-logo{width:125px;height:34px}}
+
+.brand-mini{font-size:11px;font-weight:600;line-height:1.1;letter-spacing:.09em;text-transform:uppercase}.nav-actions{display:flex;gap:8px;flex-wrap:wrap}.nav-btn{border:1px solid var(--line);background:transparent;color:var(--text);padding:9px 12px;font-size:9px;letter-spacing:.13em;text-transform:uppercase;cursor:pointer}.nav-btn:hover{border-color:var(--accent);color:var(--accent)}
+.year-menu{position:absolute;right:5vw;top:62px;width:190px;background:var(--bg-soft);border:1px solid var(--line);box-shadow:0 18px 50px rgba(0,0,0,.12);padding:8px;display:none}.year-menu.open{display:block}.year-item{display:block;width:100%;text-align:left;border:0;background:transparent;padding:12px;color:var(--text);cursor:pointer}.year-item:hover{background:var(--accent-soft);color:var(--accent)}
+.hero{min-height:76vh;padding:60px 5vw 48px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}.hero::before,.hero::after{content:"";position:absolute;border:1px solid rgba(25,24,23,.08);border-radius:50%;pointer-events:none}.hero::before{width:76vw;height:76vw;right:-32vw;top:-38vw}.hero::after{width:49vw;height:49vw;right:-18vw;top:-24vw}.topline{display:flex;justify-content:space-between;position:relative;z-index:2}.logo{font-size:13px;font-weight:600;line-height:1.18;letter-spacing:.09em;text-transform:uppercase}.season{font-size:10px;line-height:1.45;letter-spacing:.14em;text-align:right;color:var(--muted);text-transform:uppercase}.hero-content{position:relative;z-index:2;max-width:1100px}.eyebrow{color:var(--accent);font-size:10px;letter-spacing:.24em;text-transform:uppercase;margin-bottom:18px}.hero h1{font-family:"Playfair Display",serif;font-size:clamp(66px,11vw,155px);font-weight:400;line-height:.8;letter-spacing:-.07em}.hero p{max-width:440px;margin-top:34px;color:var(--muted);font-size:13px;line-height:1.7}.intro-enter{margin-top:28px;padding:14px 22px;border:1px solid var(--line);background:rgba(255,255,255,.02);color:var(--text);font-size:10px;letter-spacing:.18em;text-transform:uppercase;cursor:pointer;transition:background .2s ease,border-color .2s ease}.intro-enter:hover,.intro-enter:focus-visible{background:rgba(181,31,43,.05);border-color:rgba(181,31,43,.45);outline:none}.scroll{position:relative;z-index:2;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.calendar{padding:90px 5vw 120px;position:relative;isolation:isolate;background-color:var(--bg);background-image:repeating-linear-gradient(90deg,rgba(181,31,43,.025) 0,rgba(181,31,43,.025) 2px,transparent 2px,transparent 44px),linear-gradient(90deg,rgba(255,255,255,.72),rgba(181,31,43,.035) 12%,rgba(255,255,255,.38) 24%,rgba(181,31,43,.025) 36%,rgba(255,255,255,.56) 50%,rgba(181,31,43,.025) 64%,rgba(255,255,255,.38) 76%,rgba(181,31,43,.035) 88%,rgba(255,255,255,.72));background-size:auto,100% 100%;}.calendar::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:repeating-linear-gradient(90deg,transparent 0,transparent 14px,rgba(25,24,23,.018) 18px,transparent 22px,transparent 44px);mix-blend-mode:multiply;opacity:.8;}.calendar-head{display:flex;justify-content:space-between;align-items:end;gap:40px;margin-bottom:52px}.calendar-head h2{font-family:"Playfair Display",serif;font-size:clamp(58px,8vw,112px);font-weight:400;line-height:.78;letter-spacing:-.07em}.calendar-head p{max-width:330px;color:var(--muted);font-size:12px;line-height:1.7}.month-list{display:flex;flex-direction:column;gap:12px}
+.month{position:relative;min-height:205px;border:1px solid var(--line);overflow:hidden;cursor:pointer;transition:.35s}.month:hover{border-color:rgba(25,24,23,.38);background:var(--bg-soft)}.month-image{position:absolute;inset:0;overflow:hidden;pointer-events:none;background:#ddd}.month-image img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;filter:saturate(1.08);transition:transform .9s ease,filter .5s ease}.month-image::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(247,245,241,.98) 0%,rgba(247,245,241,.90) 18%,rgba(247,245,241,.48) 43%,rgba(247,245,241,.08) 72%,rgba(247,245,241,.02) 100%)}.month-image span{position:absolute;z-index:1;left:55%;top:50%;transform:translate(-50%,-50%);width:min(42vw,520px);height:145px;border:1px dashed rgba(25,24,23,.28);display:flex;align-items:center;justify-content:center;color:rgba(25,24,23,.55);font-size:9px;letter-spacing:.18em;text-transform:uppercase}.month:hover .month-image img{transform:scale(1.04);filter:saturate(1.15)}.month-main{min-height:205px;padding:30px 38px;display:flex;align-items:center;justify-content:space-between;position:relative;z-index:2}.month-number{color:var(--accent);font-size:9px;letter-spacing:.18em;text-transform:uppercase;margin-bottom:6px}.month-name{font-family:"Playfair Display",serif;font-size:clamp(48px,6.5vw,88px);font-weight:400;line-height:.85;letter-spacing:-.06em}.month-arrow{width:46px;height:46px;border:1px solid var(--line);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;background:rgba(247,245,241,.48);backdrop-filter:blur(4px)}
+.overlay{position:fixed;inset:0;z-index:90;background:rgba(20,18,17,.38);backdrop-filter:blur(7px);display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;pointer-events:none;transition:.35s}.overlay.active{opacity:1;visibility:visible;pointer-events:auto}.panel{width:min(1040px,94vw);max-height:88vh;overflow:auto;background:var(--bg);border:1px solid var(--line);box-shadow:0 30px 90px rgba(0,0,0,.18);transform:translateY(24px);transition:.4s}.overlay.active .panel{transform:none}.panel-head{position:sticky;top:0;z-index:2;display:flex;align-items:center;justify-content:space-between;padding:18px 24px;border-bottom:1px solid var(--line);background:rgba(247,245,241,.96);backdrop-filter:blur(10px)}.panel-kicker{color:var(--accent);font-size:9px;letter-spacing:.18em;text-transform:uppercase}.panel-title{font-family:"Playfair Display",serif;font-size:48px;font-weight:400;line-height:1}.panel-close{width:38px;height:38px;border:1px solid var(--line);border-radius:50%;background:transparent;cursor:pointer;font-size:18px}.schedule{padding:6px 24px 26px}.show{position:relative;display:grid;grid-template-columns:150px minmax(0,1fr) auto;align-items:center;gap:20px;min-height:118px;border-bottom:1px solid var(--line-soft);overflow:hidden;padding:0 2px}.show-image{position:absolute;inset:0;z-index:0;overflow:hidden;background:#ddd}.show-image img{width:100%;height:100%;object-fit:cover;filter:saturate(1.08);opacity:.95}.show-image::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(247,245,241,.97) 0%,rgba(247,245,241,.97) 8%,rgba(247,245,241,.86) 28%,rgba(247,245,241,.40) 60%,rgba(247,245,241,.08) 100%)}.show-image.placeholder::after{background:linear-gradient(90deg,var(--bg) 0%,rgba(247,245,241,.94) 45%,rgba(247,245,241,.08) 100%)}.show-image span{position:absolute;z-index:1;right:12%;top:50%;transform:translateY(-50%);border:1px dashed rgba(25,24,23,.25);padding:25px 45px;color:rgba(25,24,23,.45);font-size:8px;letter-spacing:.17em;text-transform:uppercase}.show-date{color:var(--accent);font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase}.show-time{margin-top:6px;color:var(--muted);font-size:9px;letter-spacing:.08em;text-transform:uppercase}.show-title{font-family:"Playfair Display",serif;font-size:clamp(22px,2.4vw,33px);font-weight:400;line-height:1;text-shadow:0 0 1px rgba(247,245,241,.8),0 1px 3px rgba(20,18,17,.16)}.show-subtitle{margin-top:7px;color:var(--muted);font-size:11px;line-height:1.35;-webkit-text-stroke:.18px rgba(247,245,241,.55);text-shadow:0 0 1px rgba(247,245,241,.7),0 1px 2px rgba(20,18,17,.12)}.show-actor{margin-top:5px;color:var(--text);font-size:9px;letter-spacing:.08em;text-transform:uppercase;-webkit-text-stroke:.16px rgba(247,245,241,.58);text-shadow:0 2px 6px rgba(20,18,17,.35)}.show-text{position:relative;z-index:2;min-width:0;width:100%;padding:8px 0}.show > div:not(.show-image){position:relative;z-index:2}.show-actions{display:flex;gap:8px;align-items:center}.show-button{display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--accent);color:var(--accent);background:rgba(247,245,241,.72);backdrop-filter:blur(4px);padding:10px 12px;font-size:8px;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;white-space:nowrap}.show-button:hover{background:var(--accent);color:#fff}.show-info{width:38px;height:38px;border:1px solid var(--line);border-radius:50%;background:rgba(247,245,241,.72);backdrop-filter:blur(4px);cursor:pointer}.show-info:hover{background:var(--text);color:var(--bg)}
+.details{position:fixed;inset:0;z-index:100;background:var(--bg);overflow-y:auto;opacity:0;visibility:hidden;transform:translateY(20px);transition:.45s}.details.active{opacity:1;visibility:visible;transform:none}.detail-top{position:sticky;top:0;z-index:2;display:flex;justify-content:space-between;align-items:center;padding:16px 7vw;border-bottom:1px solid var(--line);background:rgba(247,245,241,.95);backdrop-filter:blur(10px)}.detail-back{border:0;background:transparent;color:var(--text);font-size:9px;letter-spacing:.14em;text-transform:uppercase;cursor:pointer}.detail-back:hover{color:var(--accent)}.detail-close{width:42px;height:42px;border:1px solid var(--line);border-radius:50%;background:transparent;cursor:pointer;font-size:20px}.detail-hero{min-height:78vh;padding:70px 7vw;display:grid;grid-template-columns:minmax(280px,.8fr) minmax(0,1.2fr);gap:7vw;align-items:center}.poster{min-height:570px;border:1px dashed rgba(25,24,23,.28);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:9px;letter-spacing:.18em;text-transform:uppercase}.detail-date{color:var(--accent);font-size:10px;letter-spacing:.17em;text-transform:uppercase;margin-bottom:18px}.detail-title{font-family:"Playfair Display",serif;font-size:clamp(62px,8vw,118px);font-weight:400;line-height:.82;letter-spacing:-.07em}.detail-copy{max-width:520px;margin-top:32px;color:var(--muted);font-size:13px;line-height:1.8}.detail-section{padding:80px 7vw;border-top:1px solid var(--line)}.detail-section h3{font-family:"Playfair Display",serif;font-size:clamp(44px,5vw,68px);font-weight:400;letter-spacing:-.04em;margin-bottom:28px}.detail-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}.detail-box{background:var(--bg);padding:24px;min-height:125px}.detail-box span{display:block;margin-bottom:12px;color:var(--muted);font-size:8px;letter-spacing:.16em;text-transform:uppercase}.ticket{display:inline-flex;border:1px solid var(--accent);color:var(--accent);padding:16px 24px;text-decoration:none;font-size:9px;letter-spacing:.15em;text-transform:uppercase}.ticket:hover{background:var(--accent);color:#fff}
+.editor{position:fixed;inset:0;z-index:120;background:var(--bg);overflow:auto;display:none}.editor.active{display:block}.editor-wrap{max-width:1100px;margin:0 auto;padding:45px 5vw 90px}.editor-head{display:flex;justify-content:space-between;align-items:start;gap:30px;margin-bottom:45px}.editor-title{font-family:"Playfair Display",serif;font-size:clamp(55px,7vw,95px);font-weight:400;line-height:.8}.editor-small{color:var(--muted);font-size:11px;margin-top:16px;line-height:1.6}.editor-actions{display:flex;align-items:center;gap:8px;position:relative;z-index:20;pointer-events:auto}.editor-actions .editor-btn{position:relative;z-index:21;pointer-events:auto}.editor-btn{border:1px solid var(--line);background:transparent;padding:10px 13px;font-size:9px;letter-spacing:.12em;text-transform:uppercase;cursor:pointer}.editor-btn.primary{border-color:var(--accent);color:var(--accent)}.editor-btn.primary:hover{background:var(--accent);color:#fff}.editor-tools{display:flex;gap:8px;flex-wrap:wrap}.editor-month{border:1px solid var(--line);margin-bottom:18px}.editor-month-head{padding:18px 22px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between}.editor-month-head h3{font-family:"Playfair Display",serif;font-size:34px;font-weight:400}.editor-shows{padding:8px 22px}.editor-row{display:grid;grid-template-columns:120px minmax(0,1fr) auto;gap:16px;align-items:center;padding:13px 0;border-bottom:1px solid var(--line-soft)}.editor-row:last-child{border-bottom:0}.editor-month-head .editor-btn{padding:8px 10px}.editor-row-main strong{display:block;font-family:"Playfair Display",serif;font-size:21px;font-weight:400}.editor-row-main span{display:block;color:var(--muted);font-size:9px;margin-top:4px}.editor-add{width:100%;border:1px dashed rgba(181,31,43,.5);background:var(--accent-soft);color:var(--accent);padding:12px;cursor:pointer;font-size:9px;letter-spacing:.14em;text-transform:uppercase}.editor-add:hover{background:rgba(181,31,43,.16)}.month-image-editor{display:flex;align-items:center;gap:12px}.month-thumb{width:64px;height:46px;object-fit:cover;border:1px solid var(--line);background:var(--bg)}
+.login-overlay{position:fixed;inset:0;z-index:130;background:rgba(20,18,17,.45);backdrop-filter:blur(10px);display:none;align-items:center;justify-content:center}.login-overlay.active{display:flex}.login-box{width:min(420px,92vw);background:var(--bg);border:1px solid var(--line);padding:34px;box-shadow:0 25px 80px rgba(0,0,0,.18)}.login-box h2{font-family:"Playfair Display",serif;font-size:52px;font-weight:400;margin-bottom:8px}.login-box p{color:var(--muted);font-size:11px;line-height:1.6;margin-bottom:25px}.field{margin-bottom:15px}.field label{display:block;font-size:9px;letter-spacing:.13em;text-transform:uppercase;margin-bottom:7px}.field input,.field textarea,.field select{width:100%;border:1px solid var(--line);background:transparent;padding:12px;color:var(--text);outline:none}.password-wrap{position:relative}.password-wrap input{padding-right:78px}.password-toggle{position:absolute;right:8px;top:50%;transform:translateY(-50%);border:0;background:transparent;color:var(--muted);font-size:9px;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;padding:7px 6px}.password-toggle:hover{color:var(--accent)}.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--accent)}.login-actions{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:20px}.error{color:var(--accent);font-size:10px;min-height:16px}
+.form-overlay{position:fixed;inset:0;z-index:140;background:rgba(20,18,17,.45);backdrop-filter:blur(10px);display:none;align-items:center;justify-content:center}.form-overlay.active{display:flex}.form-box{width:min(760px,94vw);max-height:90vh;overflow:auto;background:var(--bg);border:1px solid var(--line);padding:32px}.form-box h2{font-family:"Playfair Display",serif;font-size:48px;font-weight:400;margin-bottom:22px}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.form-full{grid-column:1/-1}.form-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:22px}.hidden{display:none!important}
+footer{padding:45px 5vw;border-top:1px solid var(--line);display:flex;justify-content:space-between;color:var(--muted);font-size:9px;letter-spacing:.1em;text-transform:uppercase}
+
+/* Intro */
+.intro-screen{min-height:100vh;position:relative;overflow:hidden;background:var(--bg)}
+.intro-screen::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 78% 18%,rgba(181,31,43,.09),transparent 28%),linear-gradient(115deg,rgba(255,255,255,.025),transparent 50%);pointer-events:none}
+.intro-screen::after{content:"";position:absolute;width:62vw;height:62vw;right:-27vw;top:-28vw;border:1px solid rgba(25,24,23,.10);border-radius:50%;pointer-events:none}
+.intro-center,.intro-bottom{position:absolute;z-index:3}
+.intro-center{left:50%;top:50%;transform:translate(-50%,-48%);width:min(90vw,900px);text-align:center}
+.intro-kicker{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--muted);margin-bottom:18px;opacity:0;animation:introRise .8s ease .1s forwards}
+.intro-presenta{font-family:"Playfair Display",serif;font-size:22px;color:var(--text);opacity:0;animation:introRise .8s ease .26s forwards}
+.intro-center h1{font-family:"Playfair Display",serif;font-size:clamp(78px,12vw,170px);font-weight:400;line-height:.8;letter-spacing:-.07em;opacity:0;animation:introRise 1s cubic-bezier(.2,.7,.2,1) .42s forwards}
+.intro-line{width:82px;height:1px;background:var(--accent);margin:28px auto 0;transform:scaleX(0);animation:introLine .7s ease 1s forwards}
+.enter-button{margin-top:32px;border:0;background:none;color:var(--text);display:inline-flex;align-items:center;gap:18px;padding:10px 0;cursor:pointer;font-size:10px;letter-spacing:.16em;text-transform:uppercase;opacity:0;animation:introRise .8s ease 1.15s forwards}
+.enter-button span:last-child{display:inline-flex;width:34px;height:34px;border:1px solid var(--line);border-radius:50%;align-items:center;justify-content:center;font-size:15px;transition:transform .3s ease,background .3s ease,color .3s ease}
+.enter-button:hover span:last-child{transform:translateY(4px);background:var(--accent);color:#fff}
+.intro-bottom{left:0;right:0;bottom:36px;text-align:center;color:var(--muted);font-size:10px;letter-spacing:.18em;text-transform:uppercase}
+.scroll-hint{position:absolute;z-index:3;left:0;right:0;bottom:86px;display:flex;flex-direction:column;align-items:center;gap:6px;color:var(--muted);font-size:9px;letter-spacing:.2em;text-transform:uppercase;pointer-events:none;opacity:0;animation:introRise .8s ease 1.3s forwards}
+.scroll-hint span{display:inline-block;font-size:14px;animation:scrollHintBounce 1.8s ease-in-out infinite}
+@keyframes scrollHintBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+.intro-screen.exit{animation:introExit .8s cubic-bezier(.2,.7,.2,1) forwards}
+@keyframes introRise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+@keyframes introLine{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes introExit{to{transform:translateY(-100%);opacity:0}}
+
+@media(max-width:800px){.top-nav{padding:12px 4vw}.hero{min-height:72vh;padding:48px 4vw 40px}.calendar{padding:70px 4vw 90px}.calendar-head{display:block}.calendar-head p{margin-top:22px}.month-main{min-height:175px;padding:24px}.month-image span{width:58vw;height:120px}.panel{width:96vw}.panel-title{font-size:38px}.schedule{padding:0 16px 20px}.show{grid-template-columns:82px minmax(0,1fr);gap:12px;min-height:100px}.show-text{max-width:100%}.show-actions{grid-column:2}.show-info{width:34px;height:34px}.show-button{padding:8px 10px}.detail-hero{min-height:auto;padding:60px 6vw;grid-template-columns:1fr;gap:40px}.poster{min-height:430px}.detail-grid,.form-grid{grid-template-columns:1fr}.form-full{grid-column:auto}.editor-wrap{padding:35px 4vw 70px}.editor-row{grid-template-columns:90px minmax(0,1fr);gap:10px}.editor-row .editor-actions{grid-column:2}}
+@media(max-width:520px){.brand-mini{font-size:9px}.nav-btn{padding:8px 9px;font-size:8px}.hero h1{font-size:23vw}.month-name{font-size:48px}.month-arrow{width:42px;height:42px}.detail-title{font-size:17vw}.panel-head{padding:16px}.panel-title{font-size:32px}}
+
+/* Conferma eliminazione */
+.delete-overlay{position:fixed;inset:0;z-index:300;display:flex;align-items:center;justify-content:center;padding:24px;background:rgba(20,18,17,.48);backdrop-filter:blur(7px);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .25s ease,visibility .25s ease}
+.delete-overlay.active{opacity:1;visibility:visible;pointer-events:auto}
+.delete-box{width:min(440px,100%);background:var(--bg-soft);border:1px solid var(--line);padding:34px;box-shadow:0 25px 70px rgba(0,0,0,.18)}
+.delete-box h2{font-family:"Playfair Display",serif;font-size:38px;font-weight:400;line-height:1;margin-bottom:14px}
+.delete-box p{color:var(--muted);font-size:13px;line-height:1.65;margin-bottom:28px}
+.delete-name{color:var(--text);font-family:"Playfair Display",serif;font-size:20px;margin-bottom:22px}
+.delete-actions{display:flex;justify-content:flex-end;gap:10px}
+.delete-actions .danger{border-color:var(--accent);color:#fff;background:var(--accent)}
+
+.image-controls{margin-top:4px;padding:16px;border:1px solid var(--line);background:var(--bg-soft)}
+.image-preview{height:190px;border:1px solid var(--line);position:relative;overflow:hidden;background:#ddd;display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+.image-preview img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 50%;transform-origin:center;will-change:transform;display:block;z-index:1}
+.preview-label{position:relative;z-index:2;background:rgba(247,245,241,.82);padding:7px 10px;font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.range-row{display:grid;grid-template-columns:150px minmax(120px,1fr) 60px;gap:12px;align-items:center;margin:10px 0;font-size:9px;color:var(--muted)}
+.range-row input[type=range]{width:100%;accent-color:var(--accent)}
+.range-row output{color:var(--text);font-size:9px;text-align:right}
+.editor-row .editor-actions{white-space:nowrap}
+.save-overlay{position:fixed;inset:0;z-index:320;display:flex;align-items:center;justify-content:center;padding:24px;background:rgba(20,18,17,.48);backdrop-filter:blur(7px);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .25s ease,visibility .25s ease}.save-overlay.active{opacity:1;visibility:visible;pointer-events:auto}.save-overlay .delete-box{transform:translateY(10px);transition:transform .25s ease}.save-overlay.active .delete-box{transform:none}
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <a class="brand-logo" href="#" aria-label="Teatro Pubblico Ligure">
+    <!-- ATTENZIONE: qui va rimesso IL TUO LOGO ORIGINALE. Consigliato: carica il file
+         logo.png nel repo GitHub (stessa cartella dell'''HTML) e lascia semplicemente
+         src="logo.png" come sotto. In alternativa, se preferisci tenerlo incorporato nel
+         file come prima, ricopia qui la riga <img src="data:image/png;base64,..."> originale
+         (non ricreata automaticamente per evitare di corromperla). -->
+    <img src="logo.jpeg" alt="Teatro Pubblico Ligure">
+  </a>
+  <div class="search-wrap" id="searchWrap">
+    <div class="search-box">
+      <span class="search-icon" aria-hidden="true">⌕</span>
+      <input class="search-input" id="calendarSearch" type="search" autocomplete="off" placeholder="Cerca spettacolo o attore..." aria-label="Cerca spettacolo o attore">
+      <button class="search-clear" id="searchClear" type="button" aria-label="Cancella ricerca">×</button>
+    </div>
+    <div class="search-suggestions" id="searchSuggestions" role="listbox"></div>
+  </div>
+  <div class="nav-actions">
+    <button class="nav-btn" id="yearsBtn">Anni ▾</button>
+    <button class="nav-btn" id="editorBtn">Editor</button>
+  </div>
+  <div class="year-menu" id="yearMenu"></div>
+</nav>
+
+<header class="hero intro-screen" id="introScreen">
+  <div class="topline">
+    <div class="season" id="seasonLabel">Anno 2026</div>
+  </div>
+
+  <div class="intro-center">
+    <div class="intro-presenta">Teatro Pubblico Ligure</div>
+    <h1>Calendario</h1>
+    <div class="intro-line"></div>
+    <button class="intro-enter" id="enterButton" type="button">Entra nel calendario</button>
+  </div>
+  <div class="scroll-hint" aria-hidden="true">Scorri per il calendario<span>↓</span></div>
+  <div class="intro-bottom">Stagione <span id="introYear">2026</span></div>
+</header>
+
+<main class="calendar">
+  <div class="calendar-head">
+    <h2 id="calendarYearTitle">2026</h2>
+    <p id="calendarHelp">Seleziona un mese per vedere tutti gli appuntamenti.</p>
+  </div>
+  <div class="month-list" id="monthList"></div>
+</main>
+
+<!-- Pannello mese -->
+<div class="overlay" id="scheduleOverlay">
+  <section class="panel" role="dialog" aria-modal="true">
+    <div class="panel-head">
+      <div>
+        <div class="panel-kicker" id="scheduleKicker">Programmazione</div>
+        <h2 class="panel-title" id="scheduleTitle">Gennaio</h2>
+      </div>
+      <button class="panel-close" id="scheduleClose" aria-label="Chiudi">×</button>
+    </div>
+    <div class="schedule" id="scheduleList"></div>
+  </section>
+</div>
+
+<!-- Dettaglio spettacolo -->
+<div class="details" id="details" aria-hidden="true">
+  <div class="detail-top">
+    <button class="detail-back" id="detailBack">← Torna agli spettacoli</button>
+    <button class="detail-close" id="detailClose" aria-label="Chiudi">×</button>
+  </div>
+  <section class="detail-hero">
+    <div class="poster" id="detailPoster">POSTER DELLO SPETTACOLO</div>
+    <div>
+      <div class="detail-date" id="detailDate">24 OTTOBRE 2026</div>
+      <h2 class="detail-title" id="detailTitle">Nome spettacolo</h2>
+      <p class="detail-copy" id="detailIntro">Descrizione introduttiva dello spettacolo.</p>
+    </div>
+  </section>
+  <section class="detail-section">
+    <h3>Lo spettacolo</h3>
+    <p class="detail-copy" id="detailDescription">Descrizione completa dello spettacolo.</p>
+  </section>
+  <section class="detail-section">
+    <h3>Dettagli</h3>
+    <div class="detail-grid">
+      <div class="detail-box"><span>Data</span><div id="boxDate"></div></div>
+      <div class="detail-box"><span>Orario</span><div id="boxTime"></div></div>
+      <div class="detail-box"><span>Durata</span><div id="boxDuration"></div></div>
+      <div class="detail-box"><span>Regia / Cast</span><div id="boxCast"></div></div>
+      <div class="detail-box"><span>Sottotitolo</span><div id="boxSubtitle"></div></div>
+      <div class="detail-box"><span>Attore/Attrice</span><div id="boxActor"></div></div>
+      <div class="detail-box"><span>Nome del teatro</span><div id="boxTheater"></div></div>
+      <div class="detail-box"><span>Città</span><div id="boxCity"></div></div>
+      <div class="detail-box"><span>Indirizzo stradale</span><div id="boxAddress"></div></div>
+      <div class="detail-box"><span>Produzione</span><div id="boxProduction"></div></div>
+      <div class="detail-box"><span>Anno</span><div id="boxYear"></div></div>
+      <div class="detail-box"></div>
+    </div>
+  </section>
+  <section class="detail-section">
+    <h3>Biglietteria</h3>
+    <p class="detail-copy">Prenota il tuo posto per questo spettacolo.</p>
+    <br><br>
+    <div class="detail-grid" style="margin-top:28px">
+      <div class="detail-box"><span>Telefono biglietteria</span><div id="boxTicketPhone"></div></div>
+      <div class="detail-box"><span>Email biglietteria</span><div id="boxTicketEmail"></div></div>
+      <div class="detail-box"><span>Sito biglietteria</span><div id="boxTicketSite"></div></div>
+    </div>
+    <br><br>
+    <a class="ticket" id="detailTicket" href="#" target="_blank" rel="noopener">Acquista biglietti →</a>
+  </section>
+</div>
+
+<!-- Login editor -->
+<div class="search-results-overlay" id="searchResultsOverlay" aria-hidden="true">
+  <div class="search-results-wrap">
+    <div class="search-results-head">
+      <div><div class="search-results-kicker">Risultati ricerca</div><h2 class="search-results-title" id="searchResultsTitle">Ricerca</h2></div>
+      <button class="search-results-close" id="searchResultsClose" type="button">Chiudi</button>
+    </div>
+    <div class="search-result-list" id="searchResultList"></div>
+  </div>
+</div>
+<div class="login-overlay" id="loginOverlay">
+  <form class="login-box" id="loginForm">
+    <h2>Editor</h2>
+    <p>Area riservata per aggiornare la programmazione del calendario.</p>
+    <div class="field"><label for="loginCode">Codice di accesso</label><div class="password-wrap"><input id="loginCode" type="password" required autocomplete="current-password"><button type="button" class="password-toggle" id="togglePassword" aria-label="Mostra codice" aria-pressed="false">Mostra</button></div></div>
+    <div class="error" id="loginError"></div>
+    <div class="login-actions"><button type="button" class="editor-btn" id="loginCancel">Annulla</button><button class="editor-btn primary" type="submit">Entra nell'editor</button></div>
+  </form>
+</div>
+
+<!-- Editor -->
+<div class="editor" id="editor">
+  <div class="editor-wrap">
+    <div class="editor-head">
+      <div>
+        <div class="eyebrow">Gestione contenuti</div>
+        <h2 class="editor-title">Editor</h2>
+        <p class="editor-small">Anno corrente: <strong id="editorYearLabel"></strong>. Le modifiche vengono salvate online e sono visibili subito a tutti.</p>
+      </div>
+      <div class="editor-tools">
+        <button class="editor-btn primary" id="newShowBtn">+ Aggiungi spettacolo</button>
+        <button class="editor-btn" id="editorLogout">Esci</button>
+      </div>
+    </div>
+    <div id="editorContent"></div>
+  </div>
+</div>
+
+<!-- Form spettacolo -->
+<div class="form-overlay" id="formOverlay">
+  <form class="form-box" id="showForm">
+    <input type="hidden" id="editMonth" value="">
+    <input type="hidden" id="editIndex" value="">
+    <h2 id="showFormTitle">Aggiungi spettacolo</h2>
+    <div class="form-grid">
+      <div class="field"><label for="showName">Nome spettacolo</label><input id="showName" required></div>
+      <div class="field"><label for="showSubtitle">Sottotitolo</label><input id="showSubtitle"></div>
+      <div class="field"><label for="showActor">Attore/Attrice</label><input id="showActor"></div>
+      <div class="field"><label for="showTheater">Nome del teatro</label><input id="showTheater"></div>
+      <div class="field"><label for="showCity">Città</label><input id="showCity"></div>
+      <div class="field"><label for="showAddress">Indirizzo stradale</label><input id="showAddress"></div>
+      <div class="field"><label for="showProduction">Produzione</label><input id="showProduction"></div>
+      <div class="field"><label for="showDate">Data</label><input id="showDate" type="date" required></div>
+      <div class="field"><label for="showTime">Ora</label><input id="showTime" type="time" required></div>
+      <div class="field form-full"><label for="showDescription">Descrizione</label><textarea id="showDescription" rows="5" placeholder="Descrizione spettacolo"></textarea></div>
+      <div class="field"><label for="showDuration">Durata</label><input id="showDuration" placeholder="90 minuti"></div>
+      <div class="field"><label for="showCast">Regia / Cast</label><input id="showCast" placeholder="Nome regista · Cast"></div>
+      <div class="field"><label for="showTicketPhone">Telefono biglietteria</label><input id="showTicketPhone" type="tel"></div>
+      <div class="field"><label for="showTicketEmail">Email biglietteria</label><input id="showTicketEmail" type="email"></div>
+      <div class="field"><label for="showTicketSite">Sito biglietteria</label><input id="showTicketSite" type="url" placeholder="https://..."></div>
+      <div class="field"><label for="showPhoto">Foto opzionale</label><input id="showPhoto" type="file" accept="image/*"></div>
+      <div class="field form-full image-controls hidden" id="showImageControls">
+        <label>Regola immagine</label>
+        <div class="image-preview" id="showImagePreview"><div class="preview-label">Anteprima</div></div>
+        <div class="range-row"><span>Zoom</span><input id="showScale" type="range" min="1" max="2.5" step="0.01" value="1"><output id="showScaleValue">1.00×</output></div>
+        <div class="range-row"><span>Spostamento orizzontale</span><input id="showPosX" type="range" min="0" max="100" step="1" value="50"><output id="showPosXValue">50%</output></div>
+        <div class="range-row"><span>Spostamento verticale</span><input id="showPosY" type="range" min="0" max="100" step="1" value="50"><output id="showPosYValue">50%</output></div>
+        <button class="editor-btn" type="button" id="showImageReset">Reimposta immagine</button>
+      </div>
+    </div>
+    <div class="form-actions"><button type="button" class="editor-btn" id="formCancel">Annulla</button><button class="editor-btn primary" type="submit">Salva spettacolo</button></div>
+  </form>
+</div>
+
+<!-- Form immagine mese -->
+<div class="form-overlay" id="monthImageOverlay">
+  <form class="form-box" id="monthImageForm">
+    <input type="hidden" id="monthImageNumber" value="">
+    <h2>Cambia immagine mese</h2>
+    <p class="editor-small" id="monthImageLabel"></p>
+    <div class="field">
+      <label for="monthPhoto">Immagine del mese</label>
+      <input id="monthPhoto" type="file" accept="image/*">
+    </div>
+    <div class="field form-full image-controls hidden" id="monthImageControls">
+      <label>Regola immagine</label>
+      <div class="image-preview" id="monthImagePreview"><div class="preview-label">Anteprima</div></div>
+      <div class="range-row"><span>Zoom</span><input id="monthScale" type="range" min="1" max="2.5" step="0.01" value="1"><output id="monthScaleValue">1.00×</output></div>
+      <div class="range-row"><span>Spostamento orizzontale</span><input id="monthPosX" type="range" min="0" max="100" step="1" value="50"><output id="monthPosXValue">50%</output></div>
+      <div class="range-row"><span>Spostamento verticale</span><input id="monthPosY" type="range" min="0" max="100" step="1" value="50"><output id="monthPosYValue">50%</output></div>
+      <button class="editor-btn" type="button" id="monthImageReset">Reimposta immagine</button>
+    </div>
+    <div class="form-actions">
+      <button type="button" class="editor-btn" id="monthImageCancel">Annulla</button>
+      <button class="editor-btn primary" type="submit">Salva immagine</button>
+    </div>
+  </form>
+</div>
+
+<!-- Form immagine spettacolo (rapido, dalla lista editor) -->
+<div class="form-overlay" id="showQuickImageOverlay">
+  <form class="form-box" id="showQuickImageForm">
+    <input type="hidden" id="showQuickImageMonth" value="">
+    <input type="hidden" id="showQuickImageIndex" value="">
+    <h2>Cambia immagine spettacolo</h2>
+    <p class="editor-small" id="showQuickImageLabel"></p>
+    <div class="field">
+      <label for="spPhoto">Immagine dello spettacolo</label>
+      <input id="spPhoto" type="file" accept="image/*">
+    </div>
+    <div class="field form-full image-controls hidden" id="spImageControls">
+      <label>Regola immagine</label>
+      <div class="image-preview" id="spImagePreview"><div class="preview-label">Anteprima</div></div>
+      <div class="range-row"><span>Zoom</span><input id="spScale" type="range" min="1" max="2.5" step="0.01" value="1"><output id="spScaleValue">1.00×</output></div>
+      <div class="range-row"><span>Spostamento orizzontale</span><input id="spPosX" type="range" min="0" max="100" step="1" value="50"><output id="spPosXValue">50%</output></div>
+      <div class="range-row"><span>Spostamento verticale</span><input id="spPosY" type="range" min="0" max="100" step="1" value="50"><output id="spPosYValue">50%</output></div>
+      <button class="editor-btn" type="button" id="spImageReset">Reimposta immagine</button>
+    </div>
+    <div class="form-actions">
+      <button type="button" class="editor-btn" id="showQuickImageCancel">Annulla</button>
+      <button class="editor-btn primary" type="submit">Salva immagine</button>
+    </div>
+  </form>
+</div>
+
+
+<!-- Conferma eliminazione spettacolo -->
+<div class="delete-overlay" id="deleteOverlay" aria-hidden="true">
+  <div class="delete-box" role="dialog" aria-modal="true" aria-labelledby="deleteTitle">
+    <h2 id="deleteTitle">Sei sicuro?</h2>
+    <p>Stai per eliminare questo spettacolo. L'operazione rimuoverà lo spettacolo dall'editor e dal calendario online per tutti.</p>
+    <div class="delete-name" id="deleteShowName">Nome dello spettacolo</div>
+    <div class="delete-actions">
+      <button type="button" class="editor-btn" id="deleteCancel">Annulla</button>
+      <button type="button" class="editor-btn danger" id="deleteConfirm">Sì, elimina</button>
+    </div>
+  </div>
+</div>
+
+<!-- Conferma salvataggio immagine/modifiche -->
+<div class="save-overlay" id="saveOverlay" aria-hidden="true">
+  <div class="delete-box" role="dialog" aria-modal="true" aria-labelledby="saveTitle">
+    <h2 id="saveTitle">Salvare le modifiche?</h2>
+    <p id="saveMessage">Vuoi salvare questa immagine con la posizione e lo zoom scelti?</p>
+    <div class="delete-actions">
+      <button type="button" class="editor-btn" id="saveCancel">No, annulla</button>
+      <button type="button" class="editor-btn primary" id="saveConfirm">Sì, salva</button>
+    </div>
+  </div>
+</div>
+
+<footer><div>Teatro Pubblico Ligure</div><div id="footerYear">2026</div></footer>
+
+<!-- ========== FIREBASE (backend condiviso: dati visibili a tutti, in tempo reale) ========== -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script>
+  // >>> SOSTITUISCI questi valori con quelli del TUO progetto Firebase <<<
+  // (Console Firebase > Impostazioni progetto > Le tue app > Configurazione SDK)
+  const firebaseConfig = {
+    apiKey: "AIzaSyB0JvlBt5db-FbrixpSYB0fYjWh5mpvBDA",
+    authDomain: "calendario-71ec4.firebaseapp.com",
+    projectId: "calendario-71ec4",
+    storageBucket: "calendario-71ec4.firebasestorage.app",
+    messagingSenderId: "195557936917",
+    appId: "1:195557936917:web:ba17c3253c8f0fa821631c"
+  };
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+  const auth = firebase.auth();
+  const CALENDAR_DOC = db.collection('calendars').doc('main');
+</script>
+
+<!-- ========== CLOUDINARY (hosting foto gratuito, senza carta di credito) ========== -->
+<script>
+  // >>> SOSTITUISCI questi valori con quelli del TUO account Cloudinary <<<
+  // (Cloudinary Dashboard: Cloud name in alto; Upload preset da creare in Settings > Upload)
+  const CLOUDINARY_CLOUD_NAME = "orqjfhcj";
+  const CLOUDINARY_UPLOAD_PRESET = "md5s3dgi";
+</script>
+
+<!-- ========== CODICE DI ACCESSO EDITOR (al posto di email/password) ========== -->
+<script>
+  const EDITOR_ACCESS_CODE = "farna2317";
+</script>
+
+<script>
+const CURRENT_YEAR = new Date().getFullYear();
+const MONTHS = ['Gennaio','Febbraio','Marzo','Aprile','Maggio','Giugno','Luglio','Agosto','Settembre','Ottobre','Novembre','Dicembre'];
+const MONTH_SHORT = ['GEN','FEB','MAR','APR','MAG','GIU','LUG','AGO','SET','OTT','NOV','DIC'];
+const WEEKDAYS = ['DOMENICA','LUNEDÌ','MARTEDÌ','MERCOLEDÌ','GIOVEDÌ','VENERDÌ','SABATO'];
+const YEARS = [CURRENT_YEAR, CURRENT_YEAR-1, CURRENT_YEAR-2, CURRENT_YEAR-3, 2020].filter((v,i,a)=>a.indexOf(v)===i);
+const STORAGE_KEY = 'tpl_calendar_data_v7'; // non più usato per i dati condivisi, solo residuo storico
+const introScreen = document.getElementById('introScreen');
+const introYear = document.getElementById('introYear');
+const enterButton = document.getElementById('enterButton');
+
+const defaultShows = {
+  1: [
+    {title:'Nome dello spettacolo',date:'2026-01-10',time:'20:30',place:'Sala principale',description:'Descrizione spettacolo',duration:'90 minuti',cast:'Nome regista · Nome attore',ticket:'#',photo:''},
+    {title:'Nome dello spettacolo',date:'2026-01-24',time:'21:00',place:'Sala principale',description:'Descrizione spettacolo',duration:'90 minuti',cast:'Nome regista · Nome attrice',ticket:'#',photo:''}
+  ],
+  2: [],3: [],4: [],5: [],6: [],7: [],8: [],9: [],10: [
+    {title:'Nome dello spettacolo',date:'2026-10-03',time:'20:30',place:'Sala principale',description:'Descrizione spettacolo',duration:'90 minuti',cast:'Nome regista · Cast',ticket:'#',photo:''},
+    {title:'Nome dello spettacolo',date:'2026-10-10',time:'21:00',place:'Sala principale',description:'Descrizione spettacolo',duration:'90 minuti',cast:'Nome regista · Cast',ticket:'#',photo:''}
+  ],
+  11: [],12: []
+};
+
+function deepClone(obj){return JSON.parse(JSON.stringify(obj));}
+
+/* ===== PERSISTENZA CONDIVISA SU FIRESTORE (al posto di localStorage) ===== */
+let allData = {};
+let firebaseReady = false;
+let saveQueued = false;
+
+function storageLoad(){ return {}; } // i dati arrivano da Firestore tramite initFirebaseSync()
+
+function storageSave(data){
+  if(saveQueued) return;
+  saveQueued = true;
+  Promise.resolve().then(async ()=>{
+    saveQueued = false;
+    try{
+      await CALENDAR_DOC.set(data);
+    }catch(e){
+      console.error('Errore salvataggio su Firestore', e);
+      alert('Impossibile salvare online. Controlla la connessione e riprova: le modifiche potrebbero non essere visibili agli altri finché non risalvi.');
+    }
+  });
+}
+
+function seedDefaultData(){
+  const seed = {};
+  seed[CURRENT_YEAR] = deepClone(defaultShows);
+  seed.__monthImages = {};
+  seed.__monthImageSettings = {};
+  return seed;
+}
+
+function initFirebaseSync(){
+  CALENDAR_DOC.onSnapshot(snap=>{
+    if(!snap.exists){
+      allData = seedDefaultData();
+      ensureYear(CURRENT_YEAR);
+      CALENDAR_DOC.set(allData).catch(e=>console.error('Errore inizializzazione calendario', e));
+    }else{
+      allData = snap.data() || {};
+      if(!allData.__monthImages) allData.__monthImages = {};
+      if(!allData.__monthImageSettings) allData.__monthImageSettings = {};
+    }
+    ensureYear(selectedYear);
+    firebaseReady = true;
+    populateYears();
+    renderMonths();
+    if(editor.classList.contains('active')) renderEditor();
+  }, err=>{
+    console.error('Errore lettura calendario da Firestore', err);
+  });
+}
+
+function ensureYear(year){
+  if(!allData[year]) allData[year] = deepClone(defaultShows);
+  if(!allData.__monthImages) allData.__monthImages = {};
+  if(!allData.__monthImageSettings) allData.__monthImageSettings = {};
+  if(!allData.__monthImages[year]) allData.__monthImages[year] = Array(13).fill('');
+  if(!allData.__monthImageSettings[year]) allData.__monthImageSettings[year] = Array.from({length:13},()=>({scale:1,x:50,y:50}));
+  return allData[year];
+}
+function monthImages(year){
+  ensureYear(year);
+  return allData.__monthImages[year];
+}
+
+let selectedYear = CURRENT_YEAR;
+let selectedMonth = null;
+let selectedShow = null;
+
+const monthList=document.getElementById('monthList');
+const scheduleOverlay=document.getElementById('scheduleOverlay');
+const scheduleList=document.getElementById('scheduleList');
+const scheduleTitle=document.getElementById('scheduleTitle');
+const scheduleKicker=document.getElementById('scheduleKicker');
+const details=document.getElementById('details');
+const yearMenu=document.getElementById('yearMenu');
+const yearsBtn=document.getElementById('yearsBtn');
+const editor=document.getElementById('editor');
+const loginOverlay=document.getElementById('loginOverlay');
+const formOverlay=document.getElementById('formOverlay');
+const deleteOverlay=document.getElementById('deleteOverlay');
+const deleteShowName=document.getElementById('deleteShowName');
+
+let pendingDelete=null;
+let pendingSaveAction=null;
+
+/* ===== RICERCA SPETTACOLI / ATTORI ===== */
+const searchInput=document.getElementById('calendarSearch');
+const searchClear=document.getElementById('searchClear');
+const searchSuggestions=document.getElementById('searchSuggestions');
+const searchResultsOverlay=document.getElementById('searchResultsOverlay');
+const searchResultsTitle=document.getElementById('searchResultsTitle');
+const searchResultList=document.getElementById('searchResultList');
+const searchResultsClose=document.getElementById('searchResultsClose');
+
+function getSearchItems(){
+  const items=[];
+  Object.keys(allData).forEach(key=>{
+    if(!/^\d{4}$/.test(key)) return;
+    const yearData=allData[key]||{};
+    for(let month=1;month<=12;month++){
+      const shows=Array.isArray(yearData[month]) ? yearData[month] : [];
+      shows.forEach(show=>items.push({show,year:Number(key),month}));
+    }
+  });
+  return items.sort((a,b)=>b.year-a.year || a.month-b.month);
+}
+function normalizeSearch(value){
+  return String(value||'').toLocaleLowerCase('it-IT').normalize('NFD').replace(/[\u0300-\u036f]/g,'').trim();
+}
+function searchMatches(query){
+  const q=normalizeSearch(query);
+  if(!q) return [];
+  return getSearchItems().map(item=>{
+    const title=normalizeSearch(item.show.title);
+    const actor=normalizeSearch(item.show.actor || '');
+    const cast=normalizeSearch(item.show.cast || '');
+    const subtitle=normalizeSearch(item.show.subtitle || '');
+    const actorText=actor || cast;
+    let score=0;
+    if(title===q) score+=100;
+    if(title.startsWith(q)) score+=60;
+    if(actorText===q) score+=90;
+    if(actorText.startsWith(q)) score+=50;
+    if(title.includes(q)) score+=35;
+    if(actorText.includes(q)) score+=30;
+    if(cast.includes(q)) score+=25;
+    if(subtitle.includes(q)) score+=12;
+    return {...item,score};
+  }).filter(item=>item.score>0).sort((a,b)=>b.score-a.score || a.year-b.year);
+}
+function closeSearchSuggestions(){searchSuggestions.classList.remove('open');}
+function clearSearch(){searchInput.value='';searchClear.classList.remove('visible');closeSearchSuggestions();searchInput.focus();}
+function renderSearchSuggestions(){
+  const q=searchInput.value.trim();
+  searchClear.classList.toggle('visible',!!q);
+  if(!q){closeSearchSuggestions();return;}
+  const matches=searchMatches(q);
+  searchSuggestions.innerHTML='';
+  if(!matches.length){searchSuggestions.innerHTML='<div class="search-empty">Nessuno spettacolo o attore trovato.</div>';searchSuggestions.classList.add('open');return;}
+  matches.slice(0,7).forEach(item=>{
+    const b=document.createElement('button');b.type='button';b.className='search-suggestion';
+    const actor=item.show.actor || item.show.cast || '';
+    const title=item.show.title||'Nome spettacolo';
+    const actorMatch=normalizeSearch(actor).includes(normalizeSearch(q));
+    b.innerHTML=`<div class="search-suggestion-main"><div class="search-suggestion-title">${escapeHtml(title)}</div><div class="search-suggestion-meta">${MONTHS[item.month-1]} ${item.year}${actor ? ' · '+escapeHtml(actor) : ''}</div></div><span class="search-suggestion-type">${actorMatch?'Attore':'Spettacolo'}</span>`;
+    b.addEventListener('click',()=>openSearchResult(item));
+    searchSuggestions.appendChild(b);
+  });
+  if(matches.length>7){
+    const more=document.createElement('button');more.type='button';more.className='search-suggestion';more.innerHTML='<div class="search-suggestion-main"><div class="search-suggestion-title">Mostra tutti i risultati</div><div class="search-suggestion-meta">'+matches.length+' spettacoli trovati</div></div><span class="search-suggestion-type">Cerca</span>';more.addEventListener('click',()=>openSearchResults(q));searchSuggestions.appendChild(more);
+  }
+  searchSuggestions.classList.add('open');
+}
+function openSearchResult(item){
+  closeSearchSuggestions();
+  closeSearchResults();
+  searchInput.value=item.show.title||'';
+  searchClear.classList.add('visible');
+  selectedYear=item.year;
+  ensureYear(item.year);
+  renderMonths();
+  openDetails(item.show);
+}
+function openSearchResults(query){
+  const matches=searchMatches(query);
+  closeSearchSuggestions();
+  searchResultsTitle.textContent=query;
+  searchResultList.innerHTML='';
+  if(!matches.length){searchResultList.innerHTML='<div class="search-results-empty">Nessuno spettacolo trovato.</div>';}
+  matches.forEach(item=>{
+    const row=document.createElement('article');row.className='search-result';
+    const actor=item.show.actor||'';
+    row.innerHTML=`<div class="search-result-date">${formatDate(item.show.date,item.year)}<br>Ore ${escapeHtml(item.show.time||'—')}</div><div><div class="search-result-title">${escapeHtml(item.show.title||'Nome spettacolo')}</div>${item.show.subtitle?`<div class="search-result-sub">${escapeHtml(item.show.subtitle)}</div>`:''}${actor?`<div class="search-result-sub">${escapeHtml(actor)}</div>`:''}</div><div class="search-result-year">${item.year}<br>${MONTHS[item.month-1]}</div>`;
+    row.addEventListener('click',()=>{openSearchResult(item);});
+    searchResultList.appendChild(row);
+  });
+  searchResultsOverlay.classList.add('active');searchResultsOverlay.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';
+}
+function closeSearchResults(){searchResultsOverlay.classList.remove('active');searchResultsOverlay.setAttribute('aria-hidden','true');document.body.style.overflow='';}
+searchInput.addEventListener('input',renderSearchSuggestions);
+searchInput.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();const q=searchInput.value.trim();if(!q) return; const matches=searchMatches(q); if(matches.length){openSearchResult(matches[0]);} else {closeSearchSuggestions();closeSearchResults();}} if(e.key==='Escape'){closeSearchSuggestions();}});
+searchClear.addEventListener('click',clearSearch);
+searchResultsClose.addEventListener('click',closeSearchResults);
+searchResultsOverlay.addEventListener('click',e=>{if(e.target===searchResultsOverlay)closeSearchResults();});
+document.addEventListener('click',e=>{if(!e.target.closest('#searchWrap'))closeSearchSuggestions();});
+
+
+function formatDate(dateString,year){
+  if(!dateString) return '';
+  const d=new Date(dateString+'T12:00:00');
+  if(Number.isNaN(d.getTime())) return dateString;
+  return `${WEEKDAYS[d.getDay()]} ${String(d.getDate()).padStart(2,'0')} ${MONTH_SHORT[d.getMonth()]} ${year}`;
+}
+function monthIndexFromDate(dateString){
+  const d=new Date(dateString+'T12:00:00');
+  return Number.isNaN(d.getTime()) ? 1 : d.getMonth()+1;
+}
+function renderMonths(){
+  monthList.innerHTML='';
+  const data=ensureYear(selectedYear);
+  const imgs=monthImages(selectedYear);
+  MONTHS.forEach((monthName,idx)=>{
+    const monthNumber=idx+1;
+    const wrap=document.createElement('div');
+    wrap.className='month';
+    wrap.id=`month-${monthNumber}`;
+    const image=imgs[monthNumber];
+    const mi=allData.__monthImageSettings[selectedYear][monthNumber] || {scale:1,x:50,y:50};
+    const imageStyle=image ? `style="transform:scale(${mi.scale});object-position:${mi.x}% ${mi.y}%"` : '';
+    const imageMarkup=image
+      ? `<div class="month-image"><img ${imageStyle} src="${escapeAttr(image)}" alt=""></div>`
+      : `<div class="month-image"><span>IMMAGINE MESE</span></div>`;
+    wrap.innerHTML=`${imageMarkup}<div class="month-main"><div><div class="month-number">${String(monthNumber).padStart(2,'0')} · ${data[monthNumber].length} spettacoli</div><h3 class="month-name">${monthName}</h3></div><div class="month-arrow">→</div></div>`;
+    wrap.addEventListener('click',()=>openSchedule(monthNumber));
+    monthList.appendChild(wrap);
+  });
+  document.getElementById('calendarYearTitle').textContent=selectedYear;
+  const seasonLabel = document.getElementById('seasonLabel');
+  if (seasonLabel) seasonLabel.textContent='Anno '+selectedYear;
+  document.getElementById('footerYear').textContent=selectedYear;
+}
+function openSchedule(monthNumber){
+  selectedMonth=monthNumber;
+  const shows=ensureYear(selectedYear)[monthNumber] || [];
+  scheduleTitle.textContent=MONTHS[monthNumber-1];
+  scheduleKicker.textContent=`${selectedYear} · ${shows.length} spettacoli`;
+  scheduleList.innerHTML='';
+  if(!shows.length){scheduleList.innerHTML='<div style="padding:35px 0;color:var(--muted);font-size:12px">Nessuno spettacolo inserito per questo mese.</div>';} 
+  shows.forEach((show,index)=>{
+    const row=document.createElement('article');row.className='show';
+    const ticket=show.ticket && show.ticket!=='#' ? show.ticket : '#';
+    const photoMarkup=show.photo ? `<div class="show-image"><img src="${escapeAttr(show.photo)}" alt=""></div>` : `<div class="show-image placeholder"><span>IMMAGINE SPETTACOLO</span></div>`; row.innerHTML=`${photoMarkup}<div><div class="show-date">${formatDate(show.date,selectedYear)}</div><div class="show-time">Ore ${show.time || '—'}</div></div><div class="show-text"><h3 class="show-title">${escapeHtml(show.title || 'Nome spettacolo')}</h3>${show.subtitle ? `<div class="show-subtitle">${escapeHtml(show.subtitle)}</div>` : ""}${show.actor ? `<div class="show-actor">${(/(?:,|\s+e\s+|\s*&\s*)/.test(show.actor.trim()) ? "ATTORI: " : "ATTORE: ")}${escapeHtml(show.actor)}</div>` : ""}</div><div class="show-actions"><a class="show-button" href="${escapeAttr(ticket)}" ${ticket!=='#'?'target="_blank" rel="noopener"':''}>Compra biglietti</a><button class="show-info" aria-label="Dettagli spettacolo">→</button></div>`;
+    row.querySelector('.show-info').addEventListener('click',e=>{e.stopPropagation();openDetails(show);});
+    row.addEventListener('click',e=>{if(e.target.closest('a')) return;openDetails(show);});
+    scheduleList.appendChild(row);
+  });
+  scheduleOverlay.classList.add('active');
+  document.body.style.overflow='hidden';
+}
+function closeSchedule(){scheduleOverlay.classList.remove('active');document.body.style.overflow='';}
+function openDetails(show){
+  selectedShow=show;
+  document.getElementById('detailDate').textContent=formatDate(show.date,selectedYear);
+  document.getElementById('detailTitle').textContent=show.title || 'Nome spettacolo';
+  document.getElementById('detailIntro').textContent=show.subtitle || '';
+  document.getElementById('detailDescription').textContent=show.description || 'Descrizione completa dello spettacolo.';
+  document.getElementById('boxDate').textContent=formatDate(show.date,selectedYear);
+  document.getElementById('boxTime').textContent=show.time || '—';
+  document.getElementById('boxDuration').textContent=show.duration || '—';
+  document.getElementById('boxCast').textContent=show.cast || '—';
+  document.getElementById('boxSubtitle').textContent=show.subtitle || '—';
+  document.getElementById('boxActor').textContent=show.actor || '—';
+  document.getElementById('boxTheater').textContent=show.theater || show.place || '—';
+  document.getElementById('boxCity').textContent=show.city || '—';
+  document.getElementById('boxAddress').textContent=show.address || '—';
+  document.getElementById('boxProduction').textContent=show.production || '—';
+  document.getElementById('boxTicketPhone').textContent=show.ticketPhone || '—';
+  document.getElementById('boxTicketEmail').textContent=show.ticketEmail || '—';
+  document.getElementById('boxTicketSite').textContent=show.ticketSite || '—';
+  document.getElementById('boxYear').textContent=selectedYear;
+  const ticket=document.getElementById('detailTicket');ticket.href=show.ticket && show.ticket!=='#' ? show.ticket : '#';
+  const poster=document.getElementById('detailPoster');
+  const si=show.imageSettings || {scale:1,x:50,y:50};
+   poster.innerHTML=show.photo ? `<img src="${escapeAttr(show.photo)}" alt="Poster ${escapeAttr(show.title||'spettacolo')}" style="width:100%;height:100%;object-fit:cover;display:block;object-position:${si.x}% ${si.y}%;transform:scale(${si.scale});transform-origin:center">` : 'POSTER DELLO SPETTACOLO';
+  details.classList.add('active');details.setAttribute('aria-hidden','false');details.scrollTop=0;
+}
+function closeDetails(){details.classList.remove('active');details.setAttribute('aria-hidden','true');}
+function populateYears(){yearMenu.innerHTML='';YEARS.forEach(year=>{const b=document.createElement('button');b.className='year-item';b.textContent=year;b.addEventListener('click',()=>{selectedYear=year;ensureYear(year);renderMonths();yearMenu.classList.remove('open');});yearMenu.appendChild(b);});}
+function openLogin(){loginOverlay.classList.add('active');document.getElementById('loginName').focus();}
+function closeLogin(){loginOverlay.classList.remove('active');document.getElementById('loginForm').reset();document.getElementById('loginError').textContent='';}
+function openEditor(){ensureYear(CURRENT_YEAR);document.getElementById('editorYearLabel').textContent=CURRENT_YEAR;renderEditor();editor.classList.add('active');document.body.style.overflow='hidden';}
+function closeEditor(){editor.classList.remove('active');document.body.style.overflow='';}
+document.getElementById('saveCancel').addEventListener('click',closeSaveConfirm);
+document.getElementById('saveConfirm').addEventListener('click',confirmSave);
+document.getElementById('saveOverlay').addEventListener('click',e=>{if(e.target===document.getElementById('saveOverlay')) closeSaveConfirm();});
+document.getElementById('deleteCancel').addEventListener('click',closeDeleteModal);
+document.getElementById('deleteConfirm').addEventListener('click',confirmDelete);
+deleteOverlay.addEventListener('click',e=>{if(e.target===deleteOverlay) closeDeleteModal();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape' && searchResultsOverlay.classList.contains('active')) closeSearchResults(); if(e.key==='Escape' && deleteOverlay.classList.contains('active')) closeDeleteModal(); if(e.key==='Escape' && document.getElementById('saveOverlay').classList.contains('active')) closeSaveConfirm();});
+function closeDeleteModal(){
+  pendingDelete=null;
+  deleteOverlay.classList.remove('active');
+  deleteOverlay.setAttribute('aria-hidden','true');
+}
+function confirmDelete(){
+  if(!pendingDelete) return;
+  const {month,show}=pendingDelete;
+  const current=ensureYear(CURRENT_YEAR);
+  const currentShows=current[month] || [];
+  const index=currentShows.indexOf(show);
+  if(index>=0){
+    currentShows.splice(index,1);
+    storageSave(allData);
+  }
+  closeDeleteModal();
+  renderEditor();
+  renderMonths();
+}
+
+function openSaveConfirm(action,message){
+  pendingSaveAction=action;
+  document.getElementById('saveMessage').textContent=message||'Vuoi salvare le modifiche?';
+  document.getElementById('saveOverlay').classList.add('active');
+  document.getElementById('saveOverlay').setAttribute('aria-hidden','false');
+}
+function closeSaveConfirm(){
+  pendingSaveAction=null;
+  document.getElementById('saveOverlay').classList.remove('active');
+  document.getElementById('saveOverlay').setAttribute('aria-hidden','true');
+}
+function confirmSave(){
+  const action=pendingSaveAction;
+  closeSaveConfirm();
+  if(typeof action==='function') action();
+}
+
+function renderEditor(){
+  const container=document.getElementById('editorContent');
+  container.innerHTML='';
+  const data=ensureYear(CURRENT_YEAR);
+  const imgs=monthImages(CURRENT_YEAR);
+  MONTHS.forEach((monthName,idx)=>{
+    const num=idx+1;
+    const box=document.createElement('section');
+    box.className='editor-month';
+    const shows=data[num]||[];
+    const img=imgs[num];
+    const imageControl=img
+      ? `<div class="month-image-editor"><img class="month-thumb" src="${escapeAttr(img)}" alt=""><button class="editor-btn" type="button" data-month-image="${num}">Cambia immagine</button></div>`
+      : `<button class="editor-btn" type="button" data-month-image="${num}">Aggiungi immagine</button>`;
+    box.innerHTML=`<div class="editor-month-head"><h3>${monthName}</h3><div style="display:flex;align-items:center;gap:12px"><span style="color:var(--muted);font-size:10px">${shows.length} spettacoli</span>${imageControl}</div></div><div class="editor-shows"></div><button class="editor-add">+ Aggiungi spettacolo a ${monthName}</button>`;
+    const list=box.querySelector('.editor-shows');
+    if(!shows.length){list.innerHTML='<div style="padding:14px 0;color:var(--muted);font-size:10px">Nessuno spettacolo.</div>';}
+    shows.forEach((show,index)=>{
+      const row=document.createElement('div');
+      row.className='editor-row';
+      const showImageControl=show.photo
+        ? `<div class="month-image-editor"><img class="month-thumb" src="${escapeAttr(show.photo)}" alt=""><button class="editor-btn" type="button" data-show-image="${index}">Cambia immagine</button></div>`
+        : `<button class="editor-btn" type="button" data-show-image="${index}">Aggiungi immagine</button>`;
+      row.innerHTML=`<div style="color:var(--accent);font-size:10px">${formatDate(show.date,CURRENT_YEAR)}</div><div class="editor-row-main"><strong>${escapeHtml(show.title||'Nome spettacolo')}</strong><span>${escapeHtml(show.time||'')} · ${escapeHtml(show.place||'')}</span></div><div class="editor-actions">${showImageControl}<button class="editor-btn" data-edit="${index}">Modifica</button><button class="editor-btn" data-delete="${index}">Elimina</button></div>`;
+      row.querySelector('[data-show-image]').addEventListener('click', (event)=>{
+        event.preventDefault();
+        event.stopPropagation();
+        openShowQuickImageForm(num,index);
+      });
+      row.querySelector('[data-edit]').addEventListener('click', (event)=>{
+        event.preventDefault();
+        event.stopPropagation();
+        openShowForm(num,index);
+      });
+      row.querySelector('[data-delete]').addEventListener('click', (event)=>{
+        event.preventDefault();
+        event.stopPropagation();
+        pendingDelete={month:num, show};
+        deleteShowName.textContent=show.title || 'Nome spettacolo';
+        deleteOverlay.classList.add('active');
+        deleteOverlay.setAttribute('aria-hidden','false');
+      });
+      list.appendChild(row);
+    });
+    box.querySelector('.editor-add').addEventListener('click',()=>openShowForm(num,null));
+    box.querySelector('[data-month-image]').addEventListener('click',()=>openMonthImageForm(num));
+    container.appendChild(box);
+  });
+}
+function openShowForm(defaultMonth,editIndex=null){
+  const form=document.getElementById('showForm');
+  form.reset();
+  document.getElementById('showImageControls').classList.add('hidden');
+  resetImageControls('show');
+  document.getElementById('editMonth').value=editIndex===null?'':String(defaultMonth||1);
+  document.getElementById('editIndex').value=editIndex===null?'':String(editIndex);
+  const year=CURRENT_YEAR;
+  const month=defaultMonth||1;
+  document.getElementById('showDate').value=`${year}-${String(month).padStart(2,'0')}-01`;
+  document.getElementById('showFormTitle').textContent='Aggiungi spettacolo';
+  if(editIndex!==null){
+    const show=ensureYear(CURRENT_YEAR)[defaultMonth][editIndex];
+    document.getElementById('showFormTitle').textContent='Modifica spettacolo';
+    document.getElementById('showName').value=show.title||'';
+    document.getElementById('showSubtitle').value=show.subtitle||'';
+    document.getElementById('showActor').value=show.actor||'';
+    document.getElementById('showTheater').value=show.theater||show.place||'';
+    document.getElementById('showCity').value=show.city||'';
+    document.getElementById('showAddress').value=show.address||'';
+    document.getElementById('showProduction').value=show.production||'';
+    document.getElementById('showDate').value=show.date||'';
+    document.getElementById('showTime').value=show.time||'';
+    const showPlaceInput=document.getElementById('showPlace');
+    if(showPlaceInput) showPlaceInput.value=show.place||'';
+    document.getElementById('showDescription').value=show.description||'';
+    document.getElementById('showDuration').value=show.duration||'';
+    document.getElementById('showCast').value=show.cast||'';
+    document.getElementById('showTicketPhone').value=show.ticketPhone||'';
+    document.getElementById('showTicketEmail').value=show.ticketEmail||'';
+    document.getElementById('showTicketSite').value=show.ticketSite||'';
+    const showTicketInput=document.getElementById('showTicket');
+    if(showTicketInput) showTicketInput.value=show.ticket&&show.ticket!=='#'?show.ticket:'';
+    if(show.photo){ setImageControlState('show', show.imageSettings || {scale:1,x:50,y:50}, show.photo); }
+  }
+  formOverlay.classList.add('active');
+  document.getElementById('showName').focus();
+}
+function closeShowForm(){formOverlay.classList.remove('active');}
+async function fileToDataUrl(file){return new Promise((resolve,reject)=>{if(!file){resolve('');return;}const reader=new FileReader();reader.onload=()=>resolve(reader.result);reader.onerror=reject;reader.readAsDataURL(file);});}
+function openMonthImageForm(monthNumber){
+  const settings=(allData.__monthImageSettings[CURRENT_YEAR]||Array(13).fill(null))[monthNumber] || {scale:1,x:50,y:50};
+  const existingImage=monthImages(CURRENT_YEAR)[monthNumber]||'';
+
+  document.getElementById('monthImageForm').reset();
+  document.getElementById('monthImageNumber').value=String(monthNumber);
+  document.getElementById('monthImageLabel').textContent=`Immagine per ${MONTHS[monthNumber-1]}.`;
+  setImageControlState('month', settings, existingImage);
+  document.getElementById('monthImageOverlay').classList.add('active');
+  if(existingImage) document.getElementById('monthImageControls').classList.remove('hidden');
+  document.getElementById('monthPhoto').focus();
+}
+function closeMonthImageForm(){document.getElementById('monthImageOverlay').classList.remove('active');document.getElementById('monthImageControls').classList.add('hidden');}
+
+function openShowQuickImageForm(monthNumber,index){
+  const show=ensureYear(CURRENT_YEAR)[monthNumber][index];
+  const existingImage=show.photo||'';
+  const settings=show.imageSettings || {scale:1,x:50,y:50};
+
+  document.getElementById('showQuickImageForm').reset();
+  document.getElementById('showQuickImageMonth').value=String(monthNumber);
+  document.getElementById('showQuickImageIndex').value=String(index);
+  document.getElementById('showQuickImageLabel').textContent=`Immagine per "${show.title||'Nome spettacolo'}".`;
+  setImageControlState('showphoto', settings, existingImage);
+  document.getElementById('showQuickImageOverlay').classList.add('active');
+  if(existingImage) document.getElementById('spImageControls').classList.remove('hidden');
+  document.getElementById('spPhoto').focus();
+}
+function closeShowQuickImageForm(){document.getElementById('showQuickImageOverlay').classList.remove('active');document.getElementById('spImageControls').classList.add('hidden');}
+
+/* ===== CARICAMENTO FOTO SU CLOUDINARY (al posto del base64 in localStorage) ===== */
+async function compressImage(file){
+  if(!file) return '';
+  if(!file.type || !file.type.startsWith('image/')) throw new Error('File non valido');
+  const formData = new FormData();
+  formData.append('file', file);
+  formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+  const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`, { method: 'POST', body: formData });
+  if(!res.ok) throw new Error('Errore caricamento immagine su Cloudinary');
+  const data = await res.json();
+  return data.secure_url;
+}
+
+function escapeHtml(s){return String(s).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));}
+function escapeAttr(s){return String(s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+
+
+function defaultImageSettings(){return {scale:1,x:50,y:50};}
+const IMAGE_CONTROL_PREFIXES={show:'show',month:'month',showphoto:'sp'};
+const IMAGE_CONTROL_FILE_IDS={show:'showPhoto',month:'monthPhoto',showphoto:'spPhoto'};
+function resetImageControls(type){
+  const prefix=IMAGE_CONTROL_PREFIXES[type];
+  ['Scale','PosX','PosY'].forEach(k=>{
+    const el=document.getElementById(prefix+k); if(el) el.value=k==='Scale'?'1':'50';
+  });
+  updateImageControlPreview(type);
+}
+function getImageControlState(type){
+  const p=IMAGE_CONTROL_PREFIXES[type];
+  return {scale:Number(document.getElementById(p+'Scale').value)||1,x:Number(document.getElementById(p+'PosX').value)||50,y:Number(document.getElementById(p+'PosY').value)||50};
+}
+function setImageControlState(type,settings,image=''){
+  const p=IMAGE_CONTROL_PREFIXES[type];
+  const st={...defaultImageSettings(),...(settings||{})};
+  document.getElementById(p+'Scale').value=st.scale;
+  document.getElementById(p+'PosX').value=st.x;
+  document.getElementById(p+'PosY').value=st.y;
+  const controls=document.getElementById(p+'ImageControls');
+  if(controls) controls.classList.remove('hidden');
+  updateImageControlPreview(type,image);
+}
+function updateImageControlPreview(type,image=null){
+  const p=IMAGE_CONTROL_PREFIXES[type];
+  const preview=document.getElementById(p+'ImagePreview');
+  if(!preview) return;
+  const fileInput=document.getElementById(IMAGE_CONTROL_FILE_IDS[type]);
+  const file=fileInput?.files?.[0] || null;
+  let src=image || '';
+
+  const apply=()=>{
+    preview.innerHTML=src
+      ? `<img src="${escapeAttr(src)}" alt="Anteprima immagine">`
+      : '<div class="preview-label">Anteprima</div>';
+    const img=preview.querySelector('img');
+    const st=getImageControlState(type);
+    if(img){
+      img.style.transform=`scale(${st.scale})`;
+      img.style.objectPosition=`${st.x}% ${st.y}%`;
+    }
+    const sv=document.getElementById(p+'ScaleValue');
+    const xv=document.getElementById(p+'PosXValue');
+    const yv=document.getElementById(p+'PosYValue');
+    if(sv) sv.textContent=st.scale.toFixed(2)+'×';
+    if(xv) xv.textContent=st.x+'%';
+    if(yv) yv.textContent=st.y+'%';
+  };
+
+  if(!src && file){
+    const objectUrl=URL.createObjectURL(file);
+    src=objectUrl;
+    apply();
+    const img=preview.querySelector('img');
+    if(img){
+      img.addEventListener('load',()=>URL.revokeObjectURL(objectUrl),{once:true});
+      img.addEventListener('error',()=>URL.revokeObjectURL(objectUrl),{once:true});
+    }
+    return;
+  }
+
+  apply();
+}
+['show','month','showphoto'].forEach(type=>{
+  const p=IMAGE_CONTROL_PREFIXES[type];
+  ['Scale','PosX','PosY'].forEach(k=>document.getElementById(p+k)?.addEventListener('input',()=>updateImageControlPreview(type)));
+  document.getElementById(p+'ImageReset')?.addEventListener('click',()=>resetImageControls(type));
+  document.getElementById(IMAGE_CONTROL_FILE_IDS[type])?.addEventListener('change',()=>{
+    const input=document.getElementById(IMAGE_CONTROL_FILE_IDS[type]);
+    const has=!!input.files?.[0];
+    const controls=document.getElementById(p+'ImageControls');
+    const alwaysVisible = type==='month' ? !!document.getElementById('monthImageNumber').value : (type==='showphoto' ? !!document.getElementById('showQuickImageIndex').value : false);
+    if(controls) controls.classList.toggle('hidden', !has && !alwaysVisible);
+    updateImageControlPreview(type);
+  });
+});
+
+yearsBtn.addEventListener('click',()=>yearMenu.classList.toggle('open'));
+document.addEventListener('click',e=>{if(!e.target.closest('.top-nav'))yearMenu.classList.remove('open');});
+document.getElementById('scheduleClose').addEventListener('click',closeSchedule);
+scheduleOverlay.addEventListener('click',e=>{if(e.target===scheduleOverlay)closeSchedule();});
+document.getElementById('detailClose').addEventListener('click',closeDetails);
+document.getElementById('detailBack').addEventListener('click',()=>{closeDetails();});
+document.getElementById('editorBtn').addEventListener('click',openLogin);
+document.getElementById('loginCancel').addEventListener('click',closeLogin);
+const togglePassword=document.getElementById('togglePassword');
+togglePassword.addEventListener('click',()=>{const input=document.getElementById('loginCode');const visible=input.type==='text';input.type=visible?'password':'text';togglePassword.textContent=visible?'Mostra':'Nascondi';togglePassword.setAttribute('aria-label',visible?'Mostra codice':'Nascondi codice');togglePassword.setAttribute('aria-pressed',String(!visible));});
+document.getElementById('loginForm').addEventListener('submit',async e=>{
+  e.preventDefault();
+  const code=document.getElementById('loginCode').value.trim();
+  const errorBox=document.getElementById('loginError');
+  if(code!==EDITOR_ACCESS_CODE){
+    errorBox.textContent='Codice non valido.';
+    return;
+  }
+  errorBox.textContent='Accesso in corso...';
+  try{
+    await auth.signInAnonymously();
+    errorBox.textContent='';
+    closeLogin();
+    openEditor();
+  }catch(err){
+    console.error(err);
+    errorBox.textContent='Accesso non riuscito. Riprova.';
+  }
+});
+document.getElementById('editorLogout').addEventListener('click',()=>{auth.signOut().catch(()=>{});closeEditor();});
+document.getElementById('newShowBtn').addEventListener('click',()=>openShowForm(1));
+document.getElementById('formCancel').addEventListener('click',closeShowForm);
+formOverlay.addEventListener('click',e=>{if(e.target===formOverlay)closeShowForm();});
+document.getElementById('monthImageCancel').addEventListener('click',closeMonthImageForm);
+document.getElementById('monthImageOverlay').addEventListener('click',e=>{if(e.target===document.getElementById('monthImageOverlay'))closeMonthImageForm();});
+document.getElementById('showForm').addEventListener('submit',async e=>{
+  e.preventDefault();
+  const editMonth=document.getElementById('editMonth').value;
+  const editIndex=document.getElementById('editIndex').value;
+  const oldShow=(editMonth!==''&&editIndex!=='') ? ensureYear(CURRENT_YEAR)[Number(editMonth)][Number(editIndex)] : null;
+  const showPlaceInput=document.getElementById('showPlace');
+  const showTicketInput=document.getElementById('showTicket');
+  const formData={
+    title:document.getElementById('showName').value.trim(),
+    subtitle:document.getElementById('showSubtitle').value.trim(),
+    actor:document.getElementById('showActor').value.trim(),
+    theater:document.getElementById('showTheater').value.trim(),
+    city:document.getElementById('showCity').value.trim(),
+    address:document.getElementById('showAddress').value.trim(),
+    production:document.getElementById('showProduction').value.trim(),
+    ticketPhone:document.getElementById('showTicketPhone').value.trim(),
+    ticketEmail:document.getElementById('showTicketEmail').value.trim(),
+    ticketSite:document.getElementById('showTicketSite').value.trim(),
+    date:document.getElementById('showDate').value,
+    time:document.getElementById('showTime').value,
+    place:showPlaceInput ? showPlaceInput.value.trim() : (oldShow?.place || ''),
+    description:document.getElementById('showDescription').value.trim(),
+    duration:document.getElementById('showDuration').value.trim(),
+    cast:document.getElementById('showCast').value.trim(),
+    ticket:showTicketInput ? (showTicketInput.value.trim()||'#') : (oldShow?.ticket || '#')
+  };
+  if(!formData.title || !formData.date || !formData.time) return;
+  openSaveConfirm(async()=>{
+    try{
+      const date=formData.date;
+      const m=monthIndexFromDate(date);
+      const data=ensureYear(CURRENT_YEAR);
+      const uploaded=await compressImage(document.getElementById('showPhoto').files[0],1500,.80);
+      const imageSettings=getImageControlState('show');
+      const show={...formData,photo:uploaded || (oldShow?.photo || ''),imageSettings:(uploaded || oldShow?.photo) ? imageSettings : {scale:1,x:50,y:50}};
+      if(oldShow) data[Number(editMonth)].splice(Number(editIndex),1);
+      data[m].push(show);
+      data[m].sort((a,b)=>a.date.localeCompare(b.date));
+      storageSave(allData);
+      closeShowForm();
+      renderEditor();
+      renderMonths();
+    }catch(err){alert('Non è stato possibile salvare la foto. Prova con un altro file.');}
+  },'Vuoi salvare lo spettacolo e le eventuali modifiche all’immagine?');
+});
+
+document.getElementById('monthImageForm').addEventListener('submit',async e=>{
+  e.preventDefault();
+  const monthNumber=Number(document.getElementById('monthImageNumber').value);
+  const file=document.getElementById('monthPhoto').files[0];
+  if(!file && !monthImages(CURRENT_YEAR)[monthNumber]){alert('Seleziona un’immagine.');return;}
+  openSaveConfirm(async()=>{
+    try{
+      const existing=monthImages(CURRENT_YEAR)[monthNumber]||'';
+      const image=file ? await compressImage(file,1800,.80) : existing;
+      monthImages(CURRENT_YEAR)[monthNumber]=image;
+      allData.__monthImageSettings[CURRENT_YEAR][monthNumber]=getImageControlState('month');
+      storageSave(allData);
+      closeMonthImageForm();
+      renderEditor();
+      renderMonths();
+    }catch(err){alert('Non è stato possibile salvare l’immagine del mese. Prova con un altro file.');}
+  },'Vuoi salvare questa immagine con la posizione e lo zoom scelti?');
+});
+document.getElementById('showQuickImageCancel').addEventListener('click',closeShowQuickImageForm);
+document.getElementById('showQuickImageOverlay').addEventListener('click',e=>{if(e.target===document.getElementById('showQuickImageOverlay'))closeShowQuickImageForm();});
+document.getElementById('showQuickImageForm').addEventListener('submit',async e=>{
+  e.preventDefault();
+  const monthNumber=Number(document.getElementById('showQuickImageMonth').value);
+  const index=Number(document.getElementById('showQuickImageIndex').value);
+  const file=document.getElementById('spPhoto').files[0];
+  const show=ensureYear(CURRENT_YEAR)[monthNumber][index];
+  if(!file && !show.photo){alert('Seleziona un’immagine.');return;}
+  openSaveConfirm(async()=>{
+    try{
+      const image=file ? await compressImage(file) : show.photo;
+      show.photo=image;
+      show.imageSettings=getImageControlState('showphoto');
+      storageSave(allData);
+      closeShowQuickImageForm();
+      renderEditor();
+      renderMonths();
+    }catch(err){alert('Non è stato possibile salvare l’immagine dello spettacolo. Prova con un altro file.');}
+  },'Vuoi salvare questa immagine con la posizione e lo zoom scelti?');
+});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeDetails();closeSchedule();closeLogin();closeShowForm();closeMonthImageForm();closeShowQuickImageForm();closeSaveConfirm();}});
+
+populateYears();
+initFirebaseSync();
+
+if(introYear){
+  introYear.textContent=CURRENT_YEAR;
+}
+
+if(introScreen && enterButton){
+  enterButton.addEventListener('click',function(){
+
+    // Legge il mese attuale dal computer dell'utente
+    const oggi = new Date();
+    const meseCorrente = oggi.getMonth() + 1;
+
+    // Imposta subito l'anno e il mese correnti
+    selectedYear = CURRENT_YEAR;
+    selectedMonth = meseCorrente;
+
+    // Ricrea i mesi con gli ID aggiornati
+    renderMonths();
+
+    // Avvia la transizione della schermata iniziale
+    introScreen.classList.add('exit');
+
+    // Dopo la transizione nasconde la schermata iniziale
+    // e porta il browser direttamente al mese corrente.
+    window.setTimeout(function(){
+
+      introScreen.style.display = 'none';
+
+      const mese = document.getElementById('month-' + meseCorrente);
+
+      if(mese){
+        mese.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+
+    }, 850);
+
+  });
+}
+
+</script>
+</body>
+</html>
